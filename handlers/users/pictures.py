@@ -45,7 +45,7 @@ async def picture(message: types.Message, state: FSMContext):
 
     elif message.text == '4-qism':
         try:
-            for i in range(62, 71):
+            for i in range(92, 101):
                 await bot.copy_message(
                 chat_id=message.from_user.id,
                 from_chat_id=chanel_id,
@@ -55,7 +55,7 @@ async def picture(message: types.Message, state: FSMContext):
             await message.answer(text=f'{err}')
     elif message.text == '5-qism':
         try:
-            for i in range(62, 71):
+            for i in range(102, 111):
                 await bot.copy_message(
                 chat_id=message.from_user.id,
                 from_chat_id=chanel_id,
@@ -66,7 +66,7 @@ async def picture(message: types.Message, state: FSMContext):
             await message.answer(text=f'{err}')
     elif message.text == '6-qism':
         try:
-            for i in range(62, 71):
+            for i in range(112, 121):
                 await bot.copy_message(
                 chat_id=message.from_user.id,
                 from_chat_id=chanel_id,
@@ -77,7 +77,7 @@ async def picture(message: types.Message, state: FSMContext):
             await message.answer(text=f'{err}')
     elif message.text == '7-qism':
         try:
-            for i in range(62, 71):
+            for i in range(122, 131):
                 await bot.copy_message(
                 chat_id=message.from_user.id,
                 from_chat_id=chanel_id,
@@ -88,7 +88,7 @@ async def picture(message: types.Message, state: FSMContext):
             await message.answer(text=f'{err}')
     elif message.text == "8-qism":
         try:
-            for i in range(62, 71):
+            for i in range(132, 141):
                 await bot.copy_message(
                 chat_id=message.from_user.id,
                 from_chat_id=chanel_id,
@@ -99,7 +99,7 @@ async def picture(message: types.Message, state: FSMContext):
             await message.answer(text=f'{err}')
     elif message.text == '9-qism':
         try:
-            for i in range(62, 71):
+            for i in range(142, 151):
                 await bot.copy_message(
                 chat_id=message.from_user.id,
                 from_chat_id=chanel_id,
@@ -110,7 +110,7 @@ async def picture(message: types.Message, state: FSMContext):
             await message.answer(text=f'{err}')
     elif message.text == '10-qism':
         try:
-            for i in range(62, 71):
+            for i in range(152, 161):
                 await bot.copy_message(
                 chat_id=message.from_user.id,
                 from_chat_id=chanel_id,

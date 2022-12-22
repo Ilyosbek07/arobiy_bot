@@ -20,6 +20,7 @@ class Lessons(StatesGroup):
     picture = State()
     pdf = State()
 
+
 class Testt(StatesGroup):
     testt = State()
 
