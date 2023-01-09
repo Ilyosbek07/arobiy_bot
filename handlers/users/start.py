@@ -236,7 +236,7 @@ async def show_users(message: types.Message):
 
 @dp.message_handler(text='👨‍💻ADMIN BILAN ALOQA')
 async def show_users(message: types.Message):
-    await message.answer('👨‍💻ADMIN BILAN ALOQA')
+    await message.answer('@ilmun_uun')
 
 
 @dp.message_handler(text='🇸🇦 RASMLARDA ARABCHA  SO’ZLASHUV ☄️')
