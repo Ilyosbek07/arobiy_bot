@@ -255,7 +255,6 @@ from data.config import ADMINS
 from loader import db, dp
 from states.LessonsState import Testt
 # from states.pic import Testt
-from states.rekStates import RekData
 
 
 @dp.message_handler(text='POST', user_id=ADMINS)
