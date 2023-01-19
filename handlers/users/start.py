@@ -117,12 +117,12 @@ async def bot_start(message: types.Message, state: FSMContext):
 @dp.callback_query_handler(text="check_subs")
 async def checker(call: types.CallbackQuery, state: FSMContext):
     try:
-        user = await db.add_user(telegram_id=message.from_user.id,
-                                 full_name=message.from_user.full_name,
-                                 username=message.from_user.username
+        user = await db.add_user(telegram_id=call.from_user.id,
+                                 full_name=call.from_user.full_name,
+                                 username=call.from_user.username
                                  )
     except asyncpg.exceptions.UniqueViolationError:
-        user = await db.select_user(telegram_id=message.from_user.id)
+        user = await db.select_user(telegram_id=call.from_user.id)
 
     await call.answer()
     result = str()
