@@ -116,6 +116,14 @@ async def bot_start(message: types.Message, state: FSMContext):
 
 @dp.callback_query_handler(text="check_subs")
 async def checker(call: types.CallbackQuery, state: FSMContext):
+    try:
+        user = await db.add_user(telegram_id=message.from_user.id,
+                                 full_name=message.from_user.full_name,
+                                 username=message.from_user.username
+                                 )
+    except asyncpg.exceptions.UniqueViolationError:
+        user = await db.select_user(telegram_id=message.from_user.id)
+
     await call.answer()
     result = str()
     result2 = str()
@@ -144,30 +152,70 @@ async def checker(call: types.CallbackQuery, state: FSMContext):
 
 @dp.message_handler(commands=['users'])
 async def show_users(message: types.Message):
+    try:
+        user = await db.add_user(telegram_id=message.from_user.id,
+                                 full_name=message.from_user.full_name,
+                                 username=message.from_user.username
+                                 )
+    except asyncpg.exceptions.UniqueViolationError:
+        user = await db.select_user(telegram_id=message.from_user.id)
+
     a = await db.count_users()
     await message.answer(f'<b>🔷 Жами обуначилар: {a} та</b>')
 
 
 @dp.message_handler(text='📹 ARAB ALIFBOSI  O DAN 🎞️')
 async def show_users(message: types.Message):
+    try:
+        user = await db.add_user(telegram_id=message.from_user.id,
+                                 full_name=message.from_user.full_name,
+                                 username=message.from_user.username
+                                 )
+    except asyncpg.exceptions.UniqueViolationError:
+        user = await db.select_user(telegram_id=message.from_user.id)
+
     await message.answer('📹 ARAB ALIFBOSI  O DAN 🎞️', reply_markup=lessons_1)
     await Lessons.lessons_1.set()
 
 
 @dp.message_handler(text='ARABCHA PDF KITOBLAR 📗')
 async def show_users(message: types.Message):
+    try:
+        user = await db.add_user(telegram_id=message.from_user.id,
+                                 full_name=message.from_user.full_name,
+                                 username=message.from_user.username
+                                 )
+    except asyncpg.exceptions.UniqueViolationError:
+        user = await db.select_user(telegram_id=message.from_user.id)
+
     await message.answer('ARABCHA PDF KITOBLAR 📗', reply_markup=books_1)
     await Lessons.pdf.set()
 
 
 @dp.message_handler(text='📺ARAB TILIDA S’OZLASHUV VIDEO 📹')
 async def show_users(message: types.Message):
+    try:
+        user = await db.add_user(telegram_id=message.from_user.id,
+                                 full_name=message.from_user.full_name,
+                                 username=message.from_user.username
+                                 )
+    except asyncpg.exceptions.UniqueViolationError:
+        user = await db.select_user(telegram_id=message.from_user.id)
+
     await message.answer('📺ARAB TILIDA S’OZLASHUV VIDEO 📹', reply_markup=vid_1)
     await Lessons.lessons_2.set()
 
 
 @dp.message_handler(text='📷Zakariyyo bilan o’rganing 🎞️تعلم مع زكريا')
 async def Zakariyo(message: types.Message):
+    try:
+        user = await db.add_user(telegram_id=message.from_user.id,
+                                 full_name=message.from_user.full_name,
+                                 username=message.from_user.username
+                                 )
+    except asyncpg.exceptions.UniqueViolationError:
+        user = await db.select_user(telegram_id=message.from_user.id)
+
     await message.answer('📷Zakariyyo bilan o’rganing', reply_markup=ten)
     await Lessons.lessons_7.set()
 
@@ -175,6 +223,14 @@ async def Zakariyo(message: types.Message):
 # 111
 @dp.message_handler(text='MUALLIM SONIY KITOBI PDF 📚')
 async def show_users(message: types.Message):
+    try:
+        user = await db.add_user(telegram_id=message.from_user.id,
+                                 full_name=message.from_user.full_name,
+                                 username=message.from_user.username
+                                 )
+    except asyncpg.exceptions.UniqueViolationError:
+        user = await db.select_user(telegram_id=message.from_user.id)
+
     try:
         await bot.copy_message(
             chat_id=message.from_user.id,
@@ -188,6 +244,14 @@ async def show_users(message: types.Message):
 # 333
 @dp.message_handler(text='📜 ARAB TILIDA SOZLASHUV KITOBI PDF 📘')
 async def show_users(message: types.Message):
+    try:
+        user = await db.add_user(telegram_id=message.from_user.id,
+                                 full_name=message.from_user.full_name,
+                                 username=message.from_user.username
+                                 )
+    except asyncpg.exceptions.UniqueViolationError:
+        user = await db.select_user(telegram_id=message.from_user.id)
+
     try:
         await bot.copy_message(
             chat_id=message.from_user.id,
@@ -213,6 +277,14 @@ async def show_users(message: types.Message):
 @dp.message_handler(text='📚النحو التطبيقي')
 async def show_users(message: types.Message):
     try:
+        user = await db.add_user(telegram_id=message.from_user.id,
+                                 full_name=message.from_user.full_name,
+                                 username=message.from_user.username
+                                 )
+    except asyncpg.exceptions.UniqueViolationError:
+        user = await db.select_user(telegram_id=message.from_user.id)
+
+    try:
         await bot.copy_message(
             chat_id=message.from_user.id,
             from_chat_id=chanel_id,
@@ -224,29 +296,69 @@ async def show_users(message: types.Message):
 
 @dp.message_handler(text='🎞️ARAB TILINI YUQORI DARAJADA BILGANLAR UCHUN')
 async def show_users(message: types.Message):
+    try:
+        user = await db.add_user(telegram_id=message.from_user.id,
+                                 full_name=message.from_user.full_name,
+                                 username=message.from_user.username
+                                 )
+    except asyncpg.exceptions.UniqueViolationError:
+        user = await db.select_user(telegram_id=message.from_user.id)
+
     await message.answer('🎞️ARAB TILINI YUQORI DARAJADA BILGANLAR UCHUN', reply_markup=lessons_2)
     await Lessons.lessons_4.set()
 
 
 @dp.message_handler(text='A1. A2 darajasidagi hikoyalar ARABCHA 📺')
 async def show_users(message: types.Message):
+    try:
+        user = await db.add_user(telegram_id=message.from_user.id,
+                                 full_name=message.from_user.full_name,
+                                 username=message.from_user.username
+                                 )
+    except asyncpg.exceptions.UniqueViolationError:
+        user = await db.select_user(telegram_id=message.from_user.id)
+
     await message.answer('A1. A2 darajasidagi hikoyalar ARABCHA 📺', reply_markup=lessons_3)
     await Lessons.lessons_5.set()
 
 
 @dp.message_handler(text='👨‍💻ADMIN BILAN ALOQA')
 async def show_users(message: types.Message):
+    try:
+        user = await db.add_user(telegram_id=message.from_user.id,
+                                 full_name=message.from_user.full_name,
+                                 username=message.from_user.username
+                                 )
+    except asyncpg.exceptions.UniqueViolationError:
+        user = await db.select_user(telegram_id=message.from_user.id)
+
     await message.answer('@arabiy_aloqa_bot')
 
 
 @dp.message_handler(text='🇸🇦 RASMLARDA ARABCHA  SO’ZLASHUV ☄️')
 async def show_users(message: types.Message):
+    try:
+        user = await db.add_user(telegram_id=message.from_user.id,
+                                 full_name=message.from_user.full_name,
+                                 username=message.from_user.username
+                                 )
+    except asyncpg.exceptions.UniqueViolationError:
+        user = await db.select_user(telegram_id=message.from_user.id)
+
     await message.answer('🇸🇦 RASMLARDA ARABCHA  SO’ZLASHUV ☄️', reply_markup=picture)
     await Lessons.picture.set()
 
 
 @dp.message_handler(text='🔝 Asosiy Menyu', state='*')
 async def mainMenu(message: types.Message, state: FSMContext):
+    try:
+        user = await db.add_user(telegram_id=message.from_user.id,
+                                 full_name=message.from_user.full_name,
+                                 username=message.from_user.username
+                                 )
+    except asyncpg.exceptions.UniqueViolationError:
+        user = await db.select_user(telegram_id=message.from_user.id)
+
     await message.answer("Bosh sahifa", reply_markup=main)
     await state.finish()
 
