@@ -9,6 +9,7 @@ from utils.set_bot_commands import set_default_commands
 async def on_startup(dispatcher):
     await db.create()
     await db.create_table_users()
+    await db.drop_Chanel()
     await db.create_table_chanel()
     # Birlamchi komandalar (/star va /help)
     await set_default_commands(dispatcher)
