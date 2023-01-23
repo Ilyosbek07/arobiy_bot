@@ -21,64 +21,6 @@ async def get_photo_id(message: types.Message):
     await message.reply(message.photo[-1].file_id)
 
 
-@dp.message_handler(text='/update', user_id=ADMINS)
-async def update(message: types.Message):
-    await message.answer(text='Kanalni kiriting\n\n'
-                              'Masalan : "@Chanel zayavkada bo`lsa chanel_id(-123123213),chanel_url"\n\n',
-                         reply_markup=back)
-    await ChanelData.update.set()
-
-
-@dp.message_handler(text='/add', user_id=ADMINS)
-async def add_channel(message: types.Message):
-    await message.answer(text='Kanalni kiriting\n\n'
-                              'Masalan : "@Chanel zayavkada bo`lsa chanel_id(-123123213),chanel_url"\n\n',
-                         reply_markup=back)
-    await ChanelData.add.set()
-
-
-@dp.message_handler(state=ChanelData.add)
-async def add_username(message: types.Message, state: FSMContext):
-    split_chanel = message.text.split(',')
-    chanel_lst = []
-    url_lst = []
-    for i in split_chanel:
-        lst = i.split('and')
-        chanel_lst.append(lst[0])
-        url_lst.append(lst[1])
-    chanel = f'{chanel_lst}'
-    url = f'{url_lst}'
-    ch_text = chanel.replace("'", '')
-    ch_text2 = ch_text.replace(" ", '')
-    u_text = url.replace("'", '')
-    u_text2 = u_text.replace(" ", '')
-
-    await db.add_chanell(chanelll=ch_text2[1:-1], url=u_text2[1:-1])
-    await message.answer("Qo'shildi", reply_markup=main)
-    await state.finish()
-
-
-@dp.message_handler(state=ChanelData.update)
-async def update_username(message: types.Message, state: FSMContext):
-    split_chanel = message.text.split(',')
-    chanel_lst = []
-    url_lst = []
-    for i in split_chanel:
-        lst = i.split('and')
-        chanel_lst.append(lst[0])
-        url_lst.append(lst[1])
-    chanel = f'{chanel_lst}'
-    url = f'{url_lst}'
-    ch_text = chanel.replace("'", '')
-    ch_text2 = ch_text.replace(" ", '')
-    u_text = url.replace("'", '')
-    u_text2 = u_text.replace(" ", '')
-
-    await db.update_chanel(chanelll=f'{ch_text2[1:-1]}', url=f'{u_text2[1:-1]}', id=1)
-    await message.answer("Yangilandi", reply_markup=main)
-    await state.finish()
-
-
 @dp.message_handler(CommandStart(), state='*')
 async def bot_start(message: types.Message, state: FSMContext):
     try:
@@ -96,11 +38,12 @@ async def bot_start(message: types.Message, state: FSMContext):
     chanels = []
     url = []
     for i in all:
-        chanels.extend(i[1].split(','))
-        url.extend(i[2].split(','))
+        chanels.append(i['chanelll'])
+        url.append(i['url'])
+
     for channel in chanels:
         status *= await subscription.check(user_id=message.from_user.id,
-                                           channel=f'-{channel}')
+                                           channel=f'{channel}')
     if status:
         await message.answer('Kerakli bo`limni tanlang', reply_markup=main)
     else:
@@ -132,11 +75,11 @@ async def checker(call: types.CallbackQuery, state: FSMContext):
     chanels = []
     url = []
     for i in all:
-        chanels.extend(i[1].split(','))
-        url.extend(i[2].split(','))
+        chanels.append(i['chanelll'])
+        url.append(i['url'])
     for channel in chanels:
         status *= await subscription.check(user_id=call.from_user.id,
-                                           channel=f'-{channel}')
+                                           channel=f'{channel}')
     if status:
         await call.message.answer('Kerakli bo`limni tanlang', reply_markup=main)
     else:
@@ -148,20 +91,6 @@ async def checker(call: types.CallbackQuery, state: FSMContext):
                                   f'Кейин "Аъзо бўлдим" тугмасини босинг🛑',
                                   reply_markup=button,
                                   disable_web_page_preview=True)
-
-
-@dp.message_handler(commands=['users'])
-async def show_users(message: types.Message):
-    try:
-        user = await db.add_user(telegram_id=message.from_user.id,
-                                 full_name=message.from_user.full_name,
-                                 username=message.from_user.username
-                                 )
-    except asyncpg.exceptions.UniqueViolationError:
-        user = await db.select_user(telegram_id=message.from_user.id)
-
-    a = await db.count_users()
-    await message.answer(f'<b>🔷 Жами обуначилар: {a} та</b>')
 
 
 @dp.message_handler(text='📹 ARAB ALIFBOSI  O DAN 🎞️')

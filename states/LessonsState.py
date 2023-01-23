@@ -27,4 +27,4 @@ class Testt(StatesGroup):
 
 class ChanelData(StatesGroup):
     add = State()
-    update = State()
+    delete = State()

@@ -252,14 +252,17 @@ from aiogram import types
 from aiogram.dispatcher import FSMContext
 
 from data.config import ADMINS
+from keyboards.default.admin_keyboards import admin_key
 from loader import db, dp
 from states.LessonsState import Testt
+
+
 # from states.pic import Testt
 
 
-@dp.message_handler(text='POST', user_id=ADMINS)
+@dp.message_handler(text='Xabar Yuborish 🗒', user_id=ADMINS)
 async def bot_start(msg: types.Message, state: FSMContext):
-    await msg.answer("<b>POST ni yuboring</b>")
+    await msg.answer("<b>Xabarni ni yuboring</b>")
     await Testt.testt.set()
 
 
@@ -288,5 +291,5 @@ async def contumum(msg: types.Message, state: FSMContext):
         await msg.answer(f"Ҳабар юборилганлар: <b>{count}</b> та."
                          f"\n\nЮборилмаганлар: <b>{count_err}</b> та."
                          f"\n\nБазада жами: <b>{count_baza}</b> та"
-                         f" фойдаланувчи мавжуд."
+                         f" фойдаланувчи мавжуд.", reply_markup=admin_key
                          )

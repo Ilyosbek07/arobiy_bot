@@ -90,8 +90,12 @@ class Database:
         return await self.execute(sql, *parameters, fetchrow=True)
 
     async def select_chanel(self):
-        sql = "SELECT * FROM Channel WHERE id=1 "
+        sql = "SELECT * FROM Channel"
         return await self.execute(sql, fetch=True)
+
+    async def get_chanel(self, channel):
+        sql = f"SELECT * FROM Channel WHERE chanelll=$1"
+        return await self.execute(sql, channel, fetch=True)
 
     async def select_top_users(self):
         sql = "SELECT * FROM Users WHERE score IS NOT NULL ORDER BY score DESC LIMIT 20"
@@ -128,6 +132,10 @@ class Database:
     async def delete_users(self, telegram_id):
         sql = "DELETE FROM Users WHERE telegram_id=$1"
         await self.execute(sql, telegram_id, execute=True)
+
+    async def delete_channel(self, chanel):
+        sql = "DELETE FROM Channel WHERE chanelll=$1"
+        await self.execute(sql, chanel, execute=True)
 
     async def drop_users(self):
         await self.execute("DROP TABLE Users", execute=True)
