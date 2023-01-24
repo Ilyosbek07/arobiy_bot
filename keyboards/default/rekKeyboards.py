@@ -45,8 +45,9 @@ rekKey1 = ReplyKeyboardMarkup(
 )
 back = ReplyKeyboardMarkup(
     keyboard=[
-        [KeyboardButton(text='Shart emas'),
-         KeyboardButton(text='Back')]
+        [
+            KeyboardButton(text='🔙️ Orqaga'),
+        ]
     ],
     resize_keyboard=True
 )

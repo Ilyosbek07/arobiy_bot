@@ -11,7 +11,7 @@ from states.LessonsState import ChanelData
 
 @dp.message_handler(text='/admin', user_id=ADMINS)
 async def update(message: types.Message):
-    await message.answer(text='Admin qism',
+    await message.answer(text='Admin panel',
                          reply_markup=admin_key)
 
 
@@ -30,7 +30,9 @@ async def add_username(message: types.Message, state: FSMContext):
         await db.add_chanell(chanelll=f"{text}", url=f"{text[1:]}")
         await message.answer("Qo'shildi", reply_markup=admin_key)
         await state.finish()
-
+    elif text == '🔙️ Orqaga':
+        await message.answer('Admin panel', reply_markup=admin_key)
+        await state.finish()
     elif text[0] == '-':
         split_chanel = message.text.split(',')
         chanel_lst = []
@@ -62,6 +64,7 @@ async def add_channel(message: types.Message):
                          reply_markup=back)
     await ChanelData.delete.set()
 
+
 @dp.message_handler(state=ChanelData.delete)
 async def del_username(message: types.Message, state: FSMContext):
     text = message.text
@@ -70,9 +73,14 @@ async def del_username(message: types.Message, state: FSMContext):
         await db.delete_channel(chanel=text)
         await message.answer('Kanal o"chirildi', reply_markup=admin_key)
         await state.finish()
+    elif text == '🔙️ Orqaga':
+        await message.answer('Admin panel', reply_markup=admin_key)
+        await state.finish()
+
     elif not chanel:
         await message.answer("Kanal topilmadi\n"
                              "Qaytadan urinib ko'ring")
+
 
 # @dp.message_handler(state=ChanelData.update)
 # async def update_username(message: types.Message, state: FSMContext):
@@ -102,7 +110,6 @@ async def show_users(message: types.Message):
 
 @dp.message_handler(text='🏘 Bosh menu')
 async def menuu(message: types.Message):
-    a = await db.count_users()
     await message.answer('Bosh menu', reply_markup=main)
 
 
