@@ -76,9 +76,9 @@ class Database:
         sql = "INSERT INTO Channel (chanelll, url) VALUES($1, $2) returning *"
         return await self.execute(sql, chanelll, url, fetchrow=True)
 
-    async def add_json_file_user(self, full_name, username, phone, telegram_id, score):
+    async def add_json_file_user(self, full_name, username, telegram_id):
         sql = "INSERT INTO users (full_name, username, phone, telegram_id, score) VALUES($1, $2, $3,$4,$5) returning *"
-        return await self.execute(sql, full_name, username, phone, telegram_id, score, fetchrow=True)
+        return await self.execute(sql, full_name, username, telegram_id, fetchrow=True)
 
     async def select_all_users(self):
         sql = "SELECT * FROM Users"
